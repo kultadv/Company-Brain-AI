@@ -905,7 +905,7 @@
 
   <script>
     /* Web App di Google Apps Script — progetto "CompanyBrain form", deploy v1 */
-    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzTesh2257voriNTgc6CJrTOywr7TkhqAAFebKengZVcRniQMVXti_khNmVhQy8P3aS3Q/exec';
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyi0kzaWErhkNNI905n8D4l4x-dYRUv_EYKLuUvNfMFz9Ieh7Q92MDFcS0hEGo7ce5tgA/exec';
 
     /* Pagina di ringraziamento a cui mandare l'utente dopo l'invio */
     const THANKYOU = 'https://genealab.it/thankyou.html';
@@ -931,7 +931,7 @@
         });
         if (!res.ok) throw new Error('Invio non riuscito');
 
-        const params = new URLSearchParams({ nome: data.nome, email: data.email });
+        const params = new URLSearchParams({ nome: data.nome, telefono: data.telefono, email: data.email });
         window.location.href = THANKYOU + '?' + params.toString();
       } catch (err) {
         note.textContent = 'Qualcosa è andato storto, riprova o scrivici direttamente.';
