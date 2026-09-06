@@ -78,7 +78,8 @@
       transition: background .15s var(--ease), border-color .15s var(--ease);
     }
     .choices input:checked + span { background: var(--violet); border-color: var(--violet); color: #fff; }
-    .lead-form { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .lead-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .lead-form label:last-child { grid-column: 1 / -1; }
     .lead-form input {
       width: 100%;
       min-height: 46px;
