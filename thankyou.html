@@ -78,6 +78,18 @@
       transition: background .15s var(--ease), border-color .15s var(--ease);
     }
     .choices input:checked + span { background: var(--violet); border-color: var(--violet); color: #fff; }
+    .lead-form { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .lead-form input {
+      width: 100%;
+      min-height: 46px;
+      padding: 0 14px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 9px;
+      color: #fff;
+      background: rgba(255,255,255,.09);
+      font: inherit;
+    }
+    .lead-form input::placeholder { color: rgba(255,255,255,.48); }
     textarea {
       width: 100%;
       min-height: 76px;
@@ -121,6 +133,7 @@
       .panel::after { display: none; }
       .panel-intro { margin-bottom: 30px; padding-bottom: 26px; padding-right: 0; }
       .q { margin-bottom: 30px; }
+      .lead-form { grid-template-columns: 1fr; }
       .button { width: 100%; justify-content: center; }
     }
     @media (max-width: 380px) {
@@ -150,6 +163,19 @@
             <p>Più informazioni ci dai, più la tua discovery call sarà efficace.</p>
           </div>
           <form id="questForm">
+            <div class="q">
+              <div class="lead-form">
+                <label><span hidden>Nome</span>
+                  <input name="nome" id="tyNome" autocomplete="name" placeholder="Il tuo nome" required>
+                </label>
+                <label><span hidden>Telefono</span>
+                  <input name="telefono" id="tyTelefono" type="tel" autocomplete="tel" placeholder="Telefono" required>
+                </label>
+                <label><span hidden>Email di lavoro</span>
+                  <input name="email" id="tyEmail" type="email" autocomplete="email" placeholder="Email di lavoro" required>
+                </label>
+              </div>
+            </div>
             <div class="q">
               <label class="q-title">Quante persone lavorano oggi nella tua azienda?</label>
               <div class="choices">
@@ -214,21 +240,40 @@
 
   <script>
     /* Stesso URL Apps Script usato nella landing */
-    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzTesh2257voriNTgc6CJrTOywr7TkhqAAFebKengZVcRniQMVXti_khNmVhQy8P3aS3Q/exec';
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyi0kzaWErhkNNI905n8D4l4x-dYRUv_EYKLuUvNfMFz9Ieh7Q92MDFcS0hEGo7ce5tgA/exec';
 
     const params = new URLSearchParams(window.location.search);
-    const nome = params.get('nome');
+    const nome = params.get('nome') || '';
+    const telefono = params.get('telefono') || '';
     const email = params.get('email') || '';
     if (nome) {
       document.getElementById('headline').textContent = 'Complimenti ' + nome + ', hai appena fatto un passo avanti alla concorrenza.';
     }
+    /* Precompilati ma editabili: chi arriva da un link nudo li trova vuoti */
+    if (nome) document.getElementById('tyNome').value = nome;
+    if (telefono) document.getElementById('tyTelefono').value = telefono;
+    if (email) document.getElementById('tyEmail').value = email;
 
     document.getElementById('questForm').addEventListener('submit', async event => {
       event.preventDefault();
       const form = event.currentTarget;
+      if (!form.reportValidity()) return;
+
       const button = form.querySelector('button');
       const note = document.getElementById('questNote');
-      const risposte = Object.fromEntries(new FormData(form).entries());
+      const formData = new FormData(form);
+
+      const nomeVal = (formData.get('nome') || '').toString().trim();
+      const telefonoVal = (formData.get('telefono') || '').toString().trim();
+      const emailVal = (formData.get('email') || '').toString().trim();
+      const risposte = {
+        dimensione: formData.get('dimensione') || '',
+        strumenti: formData.get('strumenti') || '',
+        urgenza: formData.get('urgenza') || '',
+        preparazione_ai: formData.get('preparazione_ai') || '',
+        tempo: formData.get('tempo') || '',
+        collo_di_bottiglia: formData.get('collo_di_bottiglia') || '',
+      };
 
       const vuoto = Object.values(risposte).every(v => !String(v).trim());
       if (vuoto) {
@@ -243,7 +288,7 @@
         const res = await fetch(ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ tipo: 'questionario', email, risposte }),
+          body: JSON.stringify({ tipo: 'questionario', nome: nomeVal, telefono: telefonoVal, email: emailVal, risposte }),
         });
         if (!res.ok) throw new Error('Invio non riuscito');
         form.hidden = true;
