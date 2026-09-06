@@ -563,8 +563,11 @@
     .quote-strip .shell { display: grid; grid-template-columns: repeat(3, 1fr); }
     .quote-strip figure { margin: 0; padding: 40px 34px; border-right: var(--rail); }
     .quote-strip figure:last-child { border-right: 0; }
-    .quote-strip blockquote { margin: 0 0 18px; color: var(--ink); font-size: 16.5px; line-height: 1.5; letter-spacing: -.022em; font-style: italic; }
-    .quote-strip figcaption { color: var(--soft); font: 650 11px/1.4 var(--mono); letter-spacing: .121em; text-transform: uppercase; }
+    .quote-strip blockquote { margin: 0 0 18px; color: var(--ink); font-size: 16.5px; line-height: 1.5; letter-spacing: -.022em; font-style: italic; quotes: '\201C' '\201D'; }
+    .quote-strip blockquote::before { content: open-quote; }
+    .quote-strip blockquote::after { content: close-quote; }
+    .quote-strip blockquote .hl { color: var(--violet); opacity: .82; font-style: normal; }
+    .quote-strip figcaption { color: var(--soft); font: 400 11px/1.4 var(--mono); letter-spacing: .121em; text-transform: uppercase; }
 
     @media (max-width: 720px) {
       .quote-strip .shell { grid-template-columns: 1fr; }
@@ -613,9 +616,9 @@
     <!-- ============ LE VOCI DEGLI IMPRENDITORI ============ -->
     <div class="quote-strip" aria-label="Imprenditori che abbiamo affiancato">
       <div class="shell">
-        <figure><blockquote>Ogni volta che sono via un giorno, torno e trovo dieci domande ad aspettarmi. Vorrei che il team potesse rispondersi da solo.</blockquote><figcaption></figcaption></figure>
-        <figure><blockquote>Mi sento lontana da questo mondo dell'intelligenza artificiale, anche se capisco che ci sono opportunità che mi sto perdendo.</blockquote><figcaption></figcaption></figure>
-        <figure><blockquote>Per tutti l'intelligenza artificiale è una rivoluzione. Io la uso e ottengo solo risposte che non funzionano per il mio lavoro.</blockquote><figcaption></figcaption></figure>
+        <figure><blockquote>Ogni volta che sono via un giorno, torno e trovo dieci domande ad aspettarmi. Vorrei che il team potesse <span class="hl">rispondersi da solo</span>.</blockquote><figcaption>Imprenditore di un'azienda con più di 10 dipendenti</figcaption></figure>
+        <figure><blockquote>Mi sento lontana da questo mondo dell'intelligenza artificiale, anche se capisco che ci sono <span class="hl">opportunità che mi sto perdendo</span>.</blockquote><figcaption>Titolare di un'azienda di servizi strutturata</figcaption></figure>
+        <figure><blockquote>Per tutti l'intelligenza artificiale è una rivoluzione. Io la uso e ottengo solo <span class="hl">risposte che non funzionano</span> per il mio lavoro.</blockquote><figcaption>Titolare di uno studio commercialista</figcaption></figure>
       </div>
     </div>
 
