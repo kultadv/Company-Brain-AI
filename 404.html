@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pagina non trovata · CompanyBrain</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1e3355;
+      --muted: #526477;
+      --soft: #8b9aab;
+      --paper: #fff;
+      --wash: #f6f8fc;
+      --line: #dfe7f0;
+      --violet: #e2683f;
+      --radius: 6px;
+      --ease: cubic-bezier(.2, .75, .25, 1);
+      --sans: "Commissioner", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: Arial, "Helvetica Neue", Helvetica, ui-sans-serif, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      background: var(--wash);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    .card {
+      width: min(100% - 48px, 560px);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 56px 44px;
+      text-align: center;
+    }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin: 0 0 18px;
+    }
+    h1 {
+      font-size: clamp(40px, 8vw, 64px);
+      line-height: 1;
+      font-weight: 800;
+      margin: 0 0 18px;
+      letter-spacing: -.02em;
+    }
+    p {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0 0 32px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--violet);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(30, 51, 85, .18);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <p class="eyebrow">Errore 404</p>
+    <h1>Pagina non trovata</h1>
+    <p>Il link che hai seguito non porta da nessuna parte. Torna a CompanyBrain per scoprire come funziona.</p>
+    <a class="btn" href="/companybrain.html">Vai a CompanyBrain →</a>
+  </div>
+</body>
+</html>
