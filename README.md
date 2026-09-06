@@ -1,1 +1,1 @@
-# Second Brain AI
+# Company Brain AI
